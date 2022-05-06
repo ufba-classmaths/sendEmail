@@ -17,10 +17,9 @@ class SendMailController extends Controller
      */
     public function send(SendMailRequest $request)
     {
-        return $user = new User($request->all());
-        response(new RecoverCode2($user));
-        Mail::send(new RecoverCode2($user));
-        $email = explode('@', $user['email']);
+        $payload = $request->all();
+        Mail::send(new RecoverCode2($payload));
+        $email = explode('@', $payload['email']);
         return $this->success(null, 'Email enviado para:  ' . substr($email[0], 0, 3) . '*****@' . substr($email[1], 0, 3) . '*****');
 
         return $this->error('Email não encontrado', 404);
