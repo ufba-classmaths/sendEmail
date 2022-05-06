@@ -17,7 +17,7 @@ class SendMailController extends Controller
      */
     public function send(SendMailRequest $request)
     {
-        $user = new User($request->all());
+        return $user = new User($request->all());
         response(new RecoverCode2($user));
         Mail::send(new RecoverCode2($user));
         $email = explode('@', $user['email']);
