@@ -16,4 +16,4 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::post('/send', [SendMailController::class, 'send']);
-Route::get('/send', [SendMailController::class, 'send']);
+Route::get('/send', [SendMailController::class, 'test']);
