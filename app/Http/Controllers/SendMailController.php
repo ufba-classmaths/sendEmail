@@ -19,7 +19,7 @@ class SendMailController extends Controller
     public function send(SendMailRequest $request)
     {
         $payload = $request->all();
-        $payload += ["token" => Str::random(40)];
+        return  $payload += ["token" => Str::random(40)];
         $result = Mail::send(new RecoverCode2($payload));
         $email = explode('@', $payload['email']);
         return  [
