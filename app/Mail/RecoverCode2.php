@@ -8,7 +8,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Str;
+
 
 class RecoverCode2 extends Mailable
 {
@@ -24,9 +24,6 @@ class RecoverCode2 extends Mailable
      */
     public function __construct($playload)
     {
-
-
-        $playload += ["token" => Str::random(40)];
         $this->playload = $playload;
     }
 

@@ -7,6 +7,7 @@ use App\Mail\RecoverCode2;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Str;
 
 class SendMailController extends Controller
 {
@@ -18,9 +19,13 @@ class SendMailController extends Controller
     public function send(SendMailRequest $request)
     {
         $payload = $request->all();
+        $payload += ["token" => Str::random(40)];
         Mail::send(new RecoverCode2($payload));
         $email = explode('@', $payload['email']);
-        return  'Email enviado para:  ' . substr($email[0], 0, 3) . '*****@' . substr($email[1], 0, 3) . '*****';
+        return  [
+            "email" => 'Email enviado para:  ' . substr($email[0], 0, 3) . '*****@' . substr($email[1], 0, 3) . '*****',
+            "token" => $payload["token"]
+        ];
     }
 
     /**
