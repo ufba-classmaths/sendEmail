@@ -20,7 +20,7 @@ class SendMailController extends Controller
     {
         $payload = $request->all();
         $payload += ["token" => Str::random(40)];
-        $result = Mail::send(new RecoverCode2($payload));
+        $result = Mail::send(new RecoverCode2($payload), $payload);
         $email = explode('@', $payload['email']);
         return  [
             "status" => $result,
