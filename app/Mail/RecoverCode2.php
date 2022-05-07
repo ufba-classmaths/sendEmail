@@ -35,7 +35,7 @@ class RecoverCode2 extends Mailable
     public function build()
     {
 
-        dd($this->playload['email'], $this->playload['name']);
+        // dd($this->playload['email'], $this->playload['name']);
         $this->subject('Código de Recuperação de Acesso!');
         $this->to($this->playload['email'], $this->playload['name']);
 
