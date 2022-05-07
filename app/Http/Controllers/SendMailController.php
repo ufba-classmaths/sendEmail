@@ -24,7 +24,7 @@ class SendMailController extends Controller
         $email = explode('@', $payload['email']);
         return  [
             "email" => 'Email enviado para:  ' . substr($email[0], 0, 3) . '*****@' . substr($email[1], 0, 3) . '*****',
-            "token" => $payload["token"]
+            "token" => substr($payload['token'], 0, 3) . substr($payload['token'], -3)
         ];
     }
 
