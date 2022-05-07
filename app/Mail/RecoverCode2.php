@@ -40,7 +40,7 @@ class RecoverCode2 extends Mailable
         $this->to($this->playload['email'], $this->playload['name']);
 
         return $this->view(
-            'mail.invitation',
+            'mail.recoverCode2',
             [
                 'url' => $this->url,
                 'userName' => $this->playload['name'],
