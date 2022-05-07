@@ -20,9 +20,7 @@ class SendMailController extends Controller
         $payload = $request->all();
         Mail::send(new RecoverCode2($payload));
         $email = explode('@', $payload['email']);
-        return $this->success(null, 'Email enviado para:  ' . substr($email[0], 0, 3) . '*****@' . substr($email[1], 0, 3) . '*****');
-
-        return $this->error('Email não encontrado', 404);
+        return  'Email enviado para:  ' . substr($email[0], 0, 3) . '*****@' . substr($email[1], 0, 3) . '*****';
     }
 
     /**
