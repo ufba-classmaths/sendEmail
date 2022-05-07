@@ -39,13 +39,13 @@ class RecoverCode2 extends Mailable
         $this->subject('Código de Recuperação de Acesso!');
         $this->to($this->playload['email'], $this->playload['name']);
 
-        return $this->view(
+        dd($this->view(
             'mail.recoverCode2',
             [
                 'url' => $this->url,
                 'userName' => $this->playload['name'],
                 'token' => $this->playload['token']
             ]
-        );
+        ));
     }
 }
