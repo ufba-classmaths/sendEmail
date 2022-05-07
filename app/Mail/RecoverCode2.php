@@ -15,7 +15,7 @@ class RecoverCode2 extends Mailable
     use Queueable, SerializesModels;
 
 
-    private $user;
+    private $playload;
 
     /**
      * Create a new message instance.
@@ -26,15 +26,8 @@ class RecoverCode2 extends Mailable
     {
 
 
-        $token = Str::random(40);
-        $token_time =  now();
-
-        $this->user = User::create([
-            "name" => $playload["name"],
-            "email" => $playload["email"],
-            "token" => $token,
-            "token_time" => $token_time,
-        ]);
+        $playload += ["token" => Str::random(40)];
+        $this->playload = $playload;
     }
 
     /**
@@ -44,16 +37,15 @@ class RecoverCode2 extends Mailable
      */
     public function build()
     {
-        $this->user->email = 'silvaengcomp@gmail.com';
 
         $this->subject('Código de Recuperação de Acesso!');
-        $this->to($this->user->email, $this->user->name);
+        $this->to($this->playload['email'], $this->playload['name']);
 
         return $this->view(
             'mail.emailRescueCode',
             [
-                'userName' => $this->user->name,
-                'token' => $this->user->token
+                'userName' => $this->playload['name'],
+                'token' => $this->playload['token']
             ]
         );
     }
