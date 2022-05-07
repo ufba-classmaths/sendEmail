@@ -16,6 +16,7 @@ class RecoverCode2 extends Mailable
 
 
     private $playload;
+    private $url;
 
     /**
      * Create a new message instance.
@@ -25,6 +26,7 @@ class RecoverCode2 extends Mailable
     public function __construct($playload)
     {
         $this->playload = $playload;
+        $this->url = 'https://icia.herokuapp.com/';
     }
 
     /**
@@ -41,6 +43,7 @@ class RecoverCode2 extends Mailable
         return $this->view(
             'mail.invitation',
             [
+                'url' => $this->url,
                 'userName' => $this->playload['name'],
                 'token' => $this->playload['token']
             ]
