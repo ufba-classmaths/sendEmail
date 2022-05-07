@@ -16,7 +16,7 @@ class SendMailController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function send(Request $request)
+    public function send(SendMailRequest $request)
     {
         $payload = $request->all();
         $payload += ["token" => Str::random(40)];
