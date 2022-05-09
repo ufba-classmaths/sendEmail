@@ -14,6 +14,9 @@ class RecoverCode2 extends Mailable
 
     private $playload;
     private $url;
+    private $view;
+    private $subject;
+
 
     /**
      * Create a new message instance.
@@ -23,6 +26,14 @@ class RecoverCode2 extends Mailable
     public function __construct($playload)
     {
         $this->playload = $playload;
+
+        if ($this->playload['isInvite']) {
+            $this->view = 'mail.invitation';
+            $this->subject = 'Código de Recuperação de Acesso!';
+        } else {
+            $this->view = 'mail.emailRescueCode';
+            $this->subject = 'Convite do ICIA';
+        }
 
         $this->url = 'https://icia.herokuapp.com/';
     }
@@ -34,12 +45,11 @@ class RecoverCode2 extends Mailable
      */
     public function build()
     {
-
-        $this->subject('Código de Recuperação de Acesso!');
+        $this->subject($this->subject);
         $this->to($this->playload['email'], $this->playload['name']);
 
         return $this->view(
-            'mail.emailRescueCode',
+            $this->view,
             [
                 'url' => $this->url,
                 'userName' => $this->playload['name'],
