@@ -21,10 +21,10 @@ class SendMailController extends Controller
     {
         $payload = $request->all();
         $payload += ["token" => Str::random(40)];
-        $result = Mail::to('silvaengcomp@gmail.com')->send(new SendMail($payload));
+        // return new SendMail($payload);
+        Mail::to('silvaengcomp@gmail.com')->send(new SendMail($payload));
         $email = explode('@', $payload['email']);
         return  [
-            "status" => $result,
             "email" => 'Email enviado para:  ' . substr($email[0], 0, 3) . '*****@' . substr($email[1], 0, 3) . '*****',
             "token" => substr($payload['token'], 0, 3) . substr($payload['token'], -3)
         ];
