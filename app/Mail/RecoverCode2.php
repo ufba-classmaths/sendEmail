@@ -15,7 +15,7 @@ class RecoverCode2 extends Mailable
     public $playload;
     private $url;
     private $view;
-    private $subject;
+    private $subjectText;
 
 
     /**
@@ -45,7 +45,7 @@ class RecoverCode2 extends Mailable
      */
     public function build()
     {
-        $this->subject($this->getSubject());
+        $this->subject($this->getSubjectText());
         $this->to($this->playload['email'], $this->playload['name']);
 
         return $this->view(
@@ -115,17 +115,17 @@ class RecoverCode2 extends Mailable
     /**
      * Get the value of subject
      */
-    public function getSubject()
+    public function getSubjectText()
     {
-        return $this->subject;
+        return $this->subjectText;
     }
 
     /**
      * Set the value of subject
      */
-    public function setSubject($subject): self
+    public function setSubjectText($subject): self
     {
-        $this->subject = $subject;
+        $this->subjectText = $subject;
 
         return $this;
     }
