@@ -12,7 +12,7 @@ class RecoverCode2 extends Mailable
     use Queueable, SerializesModels;
 
 
-    private $playload;
+    public $playload;
     private $url;
     private $view;
     private $subject;
@@ -25,17 +25,17 @@ class RecoverCode2 extends Mailable
      */
     public function __construct($playload)
     {
-        $this->playload = $playload;
+        $this->setPlayload($playload);
 
         if ($this->playload['isInvite']) {
-            $this->view = 'mail.invitation';
-            $this->subject = 'Código de Recuperação de Acesso!';
+            $this->setView('mail.invitation');
+            $this->setSubject('Código de Recuperação de Acesso!');
         } else {
-            $this->view = 'mail.emailRescueCode';
-            $this->subject = 'Convite do ICIA';
+            $this->setView('mail.emailRescueCode');
+            $this->setSubject('Convite do ICIA');
         }
 
-        $this->url = 'https://icia.herokuapp.com/';
+        $this->setUrl('https://icia.herokuapp.com/');
     }
 
     /**
@@ -45,16 +45,88 @@ class RecoverCode2 extends Mailable
      */
     public function build()
     {
-        $this->subject($this->subject);
+        $this->subject($this->getSubject());
         $this->to($this->playload['email'], $this->playload['name']);
 
         return $this->view(
             $this->view,
             [
-                'url' => $this->url,
+                'url' => $this->getUrl(),
                 'userName' => $this->playload['name'],
                 'token' => $this->playload['token']
             ]
         );
+    }
+
+    /**
+     * Get the value of playload
+     */
+    public function getPlayload()
+    {
+        return $this->playload;
+    }
+
+    /**
+     * Set the value of playload
+     */
+    public function setPlayload($playload): self
+    {
+        $this->playload = $playload;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of url
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
+
+    /**
+     * Set the value of url
+     */
+    public function setUrl($url): self
+    {
+        $this->url = $url;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of view
+     */
+    public function getView()
+    {
+        return $this->view;
+    }
+
+    /**
+     * Set the value of view
+     */
+    public function setView($view): self
+    {
+        $this->view = $view;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of subject
+     */
+    public function getSubject()
+    {
+        return $this->subject;
+    }
+
+    /**
+     * Set the value of subject
+     */
+    public function setSubject($subject): self
+    {
+        $this->subject = $subject;
+
+        return $this;
     }
 }
