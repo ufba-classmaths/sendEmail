@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SendMailRequest;
 use App\Mail\RecoverCode2;
+use App\Mail\SendMail;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -20,7 +21,7 @@ class SendMailController extends Controller
     {
         $payload = $request->all();
         $payload += ["token" => Str::random(40)];
-        $result = Mail::send(new RecoverCode2($payload));
+        $result = Mail::send(new SendMail($payload));
         $email = explode('@', $payload['email']);
         return  [
             "status" => $result,
