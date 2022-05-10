@@ -48,7 +48,6 @@ class RecoverCode2 extends Mailable
         $this->subject($this->getSubjectText());
         $this->to($this->playload['email'], $this->playload['name']);
 
-        dd($this);
         return $this->view(
             $this->view,
             [
