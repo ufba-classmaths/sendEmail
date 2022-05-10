@@ -14,7 +14,7 @@ class RecoverCode2 extends Mailable
 
     public $playload;
     private $url;
-    private $view;
+    private $viewPath;
     private $subjectText;
 
 
@@ -28,11 +28,11 @@ class RecoverCode2 extends Mailable
         $this->setPlayload($playload);
 
         if ($this->playload['isInvite']) {
-            $this->setView('mail.invitation');
-            $this->setSubject('Código de Recuperação de Acesso!');
+            $this->setViewPath('mail.invitation');
+            $this->setSubjectText('Código de Recuperação de Acesso!');
         } else {
-            $this->setView('mail.emailRescueCode');
-            $this->setSubject('Convite do ICIA');
+            $this->setViewPath('mail.emailRescueCode');
+            $this->setSubjectText('Convite do ICIA');
         }
 
         $this->setUrl('https://icia.herokuapp.com/');
@@ -48,6 +48,7 @@ class RecoverCode2 extends Mailable
         $this->subject($this->getSubjectText());
         $this->to($this->playload['email'], $this->playload['name']);
 
+        dd($this);
         return $this->view(
             $this->view,
             [
@@ -97,17 +98,17 @@ class RecoverCode2 extends Mailable
     /**
      * Get the value of view
      */
-    public function getView()
+    public function getViewPath()
     {
-        return $this->view;
+        return $this->viewPath;
     }
 
     /**
      * Set the value of view
      */
-    public function setView($view): self
+    public function setViewPath($view): self
     {
-        $this->view = $view;
+        $this->viewPath = $view;
 
         return $this;
     }
