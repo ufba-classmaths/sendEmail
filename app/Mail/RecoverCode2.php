@@ -49,7 +49,7 @@ class RecoverCode2 extends Mailable
         $this->to($this->playload['email'], $this->playload['name']);
 
         return $this->view(
-            $this->view,
+            $this->viewPath,
             [
                 'url' => $this->getUrl(),
                 'userName' => $this->playload['name'],
