@@ -45,17 +45,17 @@ class SendMail extends Mailable
      */
     public function build()
     {
-        $this->subject($this->getSubjectText());
-        $this->to($this->playload['email'], $this->playload['name']);
 
-        return $this->view(
-            $this->viewPath,
-            [
-                'url' => $this->getUrl(),
-                'userName' => $this->playload['name'],
-                'token' => $this->playload['token']
-            ]
-        );
+        return
+            $this->subject($this->getSubjectText())
+            ->view(
+                $this->viewPath,
+                [
+                    'url' => $this->getUrl(),
+                    'userName' => $this->playload['name'],
+                    'token' => $this->playload['token']
+                ]
+            );
     }
 
     /**

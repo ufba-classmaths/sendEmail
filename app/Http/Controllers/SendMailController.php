@@ -21,7 +21,7 @@ class SendMailController extends Controller
     {
         $payload = $request->all();
         $payload += ["token" => Str::random(40)];
-        // return new SendMail($payload);
+        // return new SendMail($payload);->to($this->playload['email'], $this->playload['name'])
         Mail::to('silvaengcomp@gmail.com')->send(new SendMail($payload));
         $email = explode('@', $payload['email']);
         return  [

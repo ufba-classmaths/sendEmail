@@ -19,7 +19,7 @@
                         <li>passo 4: Defina uma senha </li>
                     </ul>
                     <br>
-                    <p class="code">{{ substr($token, 0, 3) . substr($token, -3) }}</p>
+                    {{-- <p class="code">{{ substr($token, 0, 3) . substr($token, -3) }}</p> --}}
                 </div>
             </div>
         </div>
